@@ -546,7 +546,7 @@ export function Control() {
           <Row label="Planetarium mode" hint="Only show stars etc. - no planes">
             <Toggle value={cfg.planetariumMode} onChange={(v) => set({ planetariumMode: v })} />
           </Row>
- 
+
           <Row label="Stars">
             <Toggle value={cfg.showStars} onChange={(v) => set({ showStars: v })} />
           </Row>

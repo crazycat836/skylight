@@ -312,9 +312,10 @@ export interface Config {
   /** Show the on-screen calibration HUD on the display. */
   showHud: boolean;
 
-  /** Planetarium mode - don't show any planes */
+  /** Planetarium mode — celestial bodies only, no aircraft. */
   planetariumMode: boolean;
-  // --- sky layer (sun / moon / stars / satellites at true positions) ---  
+
+  // --- sky layer (sun / moon / stars / satellites at true positions) ---
   showStars: boolean;
   showSun: boolean;
   showMoon: boolean;

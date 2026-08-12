@@ -247,6 +247,7 @@ export class Poller {
   }
 
   private async refreshApi(): Promise<void> {
+    if (this.o.getConfig().planetariumMode) return;
     if (Date.now() < this.apiBackoffUntil) return;
     const list = await this.fetchList("api", Date.now());
     if (list) this.lastApi = list;
@@ -278,17 +279,18 @@ export class Poller {
 
     if (this.o.getConfig().planetariumMode) {
       this.last = [];
-      this.o.onSnapshot(now, []);
-      this.o.onStatus({
+      this.status = {
         source: this.o.source,
         ok: true,
         count: 0,
         lastOk: now,
         message: "Aircraft display disabled",
-      });
-    return;
+      };
+      this.o.onSnapshot(now, []);
+      this.o.onStatus(this.status);
+      return;
     }
- 
+
     if (this.o.source === "api" && now < this.apiBackoffUntil) {
       const waitS = Math.ceil((this.apiBackoffUntil - now) / 1000);
       this.status = {
